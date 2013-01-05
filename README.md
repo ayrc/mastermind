@@ -14,4 +14,6 @@ In the command line, type "python mastermind.py" for a game with pegs. Type "pyt
 The game itself has this format (# denotes number):
 attempt# yourGuess #correctPositions #correctCharacters
 
-I might add the choice of having a certain number of pegs later (e.g., given 6 possible pegs, decode a 4 peg code).
+The last 2 numbers might be on a different line, depending on if you pressed "Enter/Return" or ctrl-DD (EOF).
+
+I renamed the pegs to a b c d e f g h as opposed to @ # $ %. You can now play games with more choices of pegs (e.g., 4 peg code can use 6 possible pegs). The choices will go in alphabetical order (if you choose 4 letters, they will be a b c d; if you choose 6 letters, they will be a b c d e f).

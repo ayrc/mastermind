@@ -12,14 +12,14 @@ class word_generator:
 		return line
 
 class peg_generator:
-	pegs = ['@','%','$','#']
+	pegs = ['a','b','c','d','e','f','g','h']
 	sequence = []
-	def __init__(self,numPegs):
-		for index in range(numPegs):
-			self.sequence.append(random.choice(self.pegs))
-	def newWord(self):
+	def __init__(self,numSlots,numPegs):
+		for index in range(numSlots):
+			self.sequence.append(random.choice(self.pegs[0:numPegs]))
+	def newWord(self,numPegs):
 		for index in range(len(self.sequence)):
-	        	self.sequence[index] = random.choice(self.pegs)
+	        	self.sequence[index] = random.choice(self.pegs[0:numPegs])
 
 def play(codeList):
 	trial = 1
@@ -63,7 +63,7 @@ def main():
 			print "There are ", len(word), " characters"
 			play(word)
 	else:
-		codeLen = None
+		codeLen, numChoices = None,None
 		while not codeLen or codeLen < 1:
 			try:
 				codeLen = int(raw_input("Length of code: "))
@@ -71,11 +71,18 @@ def main():
 					print "Length must be > 0"
 			except ValueError:
 				print "Invalid number"
-		code = peg_generator(codeLen)
+		while not numChoices or numChoices < 1:
+			try:
+				numChoices = int(raw_input("Number of possible pegs to be used: "))
+				if numChoices < 1:
+					print "Number of possible pegs must be > 0"
+			except ValueError:
+				print "Invalid number"
+		code = peg_generator(codeLen,numChoices)
 		for index in range(numGames):
 			print "Round " + str(index+1)
 			play(code.sequence)
-			code.newWord()
+			code.newWord(numChoices)
 
 if __name__ == "__main__":
 	main()
